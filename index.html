@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESE Real Test Registration | PW Coupon Wallah</title>
+    <style>
+        :root {
+            --cream-white: #f8f5f0;
+            --black: #1a1a1a;
+            --dark-gray: #333;
+            --light-gray: #e0e0e0;
+            --accent: #6a11cb;
+            --accent-light: #8e44ad;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--cream-white);
+            color: var(--black);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .header {
+            background: white;
+            color: var(--black);
+            padding: 28px;
+            text-align: center;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            font-size: 15px;
+            color: var(--dark-gray);
+            font-weight: 400;
+        }
+        
+        .form-container {
+            padding: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--black);
+            font-size: 15px;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: white;
+            color: var(--black);
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input {
+            width: auto;
+            accent-color: var(--accent);
+        }
+        
+        .radio-option label {
+            font-weight: 400;
+            color: var(--dark-gray);
+        }
+        
+        .btn {
+            background: var(--black);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background: var(--dark-gray);
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .test-info {
+            background: var(--cream-white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 28px;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .test-info h3 {
+            color: var(--black);
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .test-info ul {
+            list-style-type: none;
+        }
+        
+        .test-info li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .test-info li:before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .success-message {
+            display: none;
+            padding: 40px 28px;
+            text-align: center;
+        }
+        
+        .success-message h2 {
+            color: var(--black);
+            margin-bottom: 16px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .success-message p {
+            margin-bottom: 24px;
+            font-size: 15px;
+            color: var(--dark-gray);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .success-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: rgba(106, 17, 203, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .success-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--accent);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 16px;
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 24px 20px;
+            }
+            
+            .form-container {
+                padding: 24px 20px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ESE Real Test Registration</h1>
+            <p>Experience the real ESE exam environment</p>
+        </div>
+        
+        <div class="form-container" id="registrationForm">
+            <div class="test-info">
+                <h3>Test Details</h3>
+                <ul>
+                    <li><strong>For PRE Only:</strong> ₹99/-</li>
+                    <li><strong>For PRE & MAINS Both:</strong> ₹199/-</li>
+                    <li><strong>PRE Test Date:</strong> 18th & 25th May 2025</li>
+                    <li><strong>MAINS Test Date:</strong> 20th July 2025</li>
+                    <li><strong>Registration Ends:</strong> 12th May 2025</li>
+                </ul>
+            </div>
+            
+            <div class="form-group">
+                <label for="fullName">Student's Full Name</label>
+                <input type="text" id="fullName" required placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" required placeholder="Enter your email address">
+            </div>
+            
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" required placeholder="Enter your 10-digit mobile number">
+            </div>
+            
+            <div class="form-group">
+                <label>Which type of ESE Real Test are you registering for?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="prelims" name="testType" value="Prelims" checked>
+                        <label for="prelims">Prelims Only (₹99)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="prelimsMains" name="testType" value="Prelims + Mains">
+                        <label for="prelimsMains">Prelims + Mains (₹199)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="btn" id="submitBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Register Now
+            </button>
+        </div>
+        
+        <div class="loading" id="loadingIndicator">
+            <div class="loading-spinner"></div>
+            <p>Processing your registration...</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            <div class="success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering for the ESE Real Test. We've sent an email with your exclusive discount coupon and redemption instructions.</p>
+            <p>Please check your inbox (and spam folder) for an email from <strong>pwcouponwallah@gmail.com</strong>.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationForm = document.getElementById('registrationForm');
+            const successMessage = document.getElementById('successMessage');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            submitBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                const fullName = document.getElementById('fullName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const mobile = document.getElementById('mobile').value.trim();
+                const testType = document.querySelector('input[name="testType"]:checked').value;
+                
+                if (!fullName || !email || !mobile) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+                
+                if (!validateMobile(mobile)) {
+                    alert('Please enter a valid 10-digit mobile number');
+                    return;
+                }
+                
+                // Show loading state
+                registrationForm.style.display = 'none';
+                loadingIndicator.style.display = 'block';
+                
+                // Prepare data for submission
+                const formData = {
+                    fullName: fullName,
+                    email: email,
+                    mobile: mobile,
+                    testType: testType,
+                    timestamp: new Date().toISOString()
+                };
+                
+                // Send data to Google Apps Script
+                fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(() => {
+                    // Show success message
+                    loadingIndicator.style.display = 'none';
+                    successMessage.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('There was an error submitting your form. Please try again.');
+                    registrationForm.style.display = 'block';
+                    loadingIndicator.style.display = 'none';
+                });
+            });
+            
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            function validateMobile(mobile) {
+                const re = /^[0-9]{10}$/;
+                return re.test(mobile);
+            }
+        });
+    </script>
+</body>
+</html>
